@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>User</title>
+  </head>
+  <body>
+    <a href="/logout_view">Logout</a>
+    <a href="/quotes">Dashboard</a>
+    
+    <h2>Posts by: {{the_user.name}}</h2>
+    <h3>Count:{{their_quotes.num_posted}} </h3>
+
+    {% for a_quote in their_quotes %}
+    <fieldset>
+      <p>{{a_quote.quoted_by}}: {{a_quote.content}}</p>
+      </fieldset>
+    {% endfor %}
+
+
+
+  </body>
+</html>

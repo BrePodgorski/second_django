@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quotes</title>
+  </head>
+  <body>
+    <a href="/logout_view">Logout</a>
+  <h1>Hello {{current_user.name}}!</h1>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{message.tags}}"{% endif %}>
+            {{message}}</li>
+       {% endfor %}
+    </ul>
+  {% endif %}
+  <h2>Quotable Quotes</h2>
+
+  {% for a_quote in quotable_quotes %}
+    <fieldset>
+      <p>By: {{a_quote.quoted_by}}</p>
+      <p>The Quote: {{a_quote.content}}</p>
+      <p>Posted by: <a href="/user/{{a_quote.creator.id}}">{{a_quote.creator.name}}</a></p>
+      <a href="/add_to_fav/{{a_quote.id}}">Add to My List</a>
+    </fieldset>
+  {% endfor %}
+
+
+
+
+
+  <h2>Your Favorites</h2>
+  {% for a_fav in my_faves %}
+    <fieldset>
+      <p>{{a_fav.quoted_by}}</p>
+      <p>{{a_fav.content}}</p>
+      <p>Posted by: <a href="/user/{{a_fav.creator.id}}">{{a_quote.creator.name}}</a></p>
+      <a href="/remove_from_fav/{{a_fav.id}}">Remove From My List</a>
+  </fieldset>
+  {% endfor %}
+
+
+<filedset>
+  <h2>Contribute a Quote:</h2>
+  <form class="process_quotes" action="/process_quotes" method="post">
+    {% csrf_token %}
+    <p>Quoted By: <input type="text" name="quoted_by" value=""></p>
+    <p>Message: <textarea name="content" rows="6" cols="60"></textarea>
+    <input type="submit" name="submit" value="Submit">
+  </form>
+</fieldset>
+  </body>
+</html>
